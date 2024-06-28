@@ -1,7 +1,6 @@
 'use client'
 
 import SingleBook from "@/components/singleBook/singleBook"
-import useDimension from "@/hooks/dimension"
 import { useEffect, useState } from "react"
 type BooksType = {
   _id: number,
@@ -15,7 +14,6 @@ type BooksType = {
   opinion: string
 }
 export default function Home() {
-  const windoWheight = useDimension()
   const [books, setBooks] = useState<BooksType[]>([])
   const [isReading, setIsReading] = useState<BooksType>()
 
@@ -41,7 +39,6 @@ export default function Home() {
   }, [])
   return (
     <main className="flex p-[12px] flex-col gap-4 my-[70px] py-[24px] "
-      style={{ height: windoWheight.height }}
     >
 
       {isReading && <SingleBook
@@ -68,7 +65,9 @@ export default function Home() {
             pages={e.pages}
             resume={e.resume}
             category={e.category.name}
-            publisher="" ></SingleBook>
+            publisher=""
+            isReading={e.isReading}
+          ></SingleBook>
         })
       }
     </main>
