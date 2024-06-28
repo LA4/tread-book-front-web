@@ -1,5 +1,6 @@
 'use client'
 
+import CategorySelector from "@/components/categorySelector/categorySelector"
 import SingleBook from "@/components/singleBook/singleBook"
 import { useEffect, useState } from "react"
 type BooksType = {
@@ -29,7 +30,6 @@ export default function Home() {
   const fetchBookIsReading = async () => {
     const response = await fetch("http://localhost:3000/books/status/isRead")
     const data = await response.json()
-    console.log(data)
     setIsReading(prevData => prevData = data[0])
     fetchBooks()
   }
@@ -53,7 +53,7 @@ export default function Home() {
       ></SingleBook>}
 
       <div>
-        Selection des categories
+        <CategorySelector />
       </div>
 
       {
