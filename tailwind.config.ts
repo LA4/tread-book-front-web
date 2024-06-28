@@ -23,7 +23,9 @@ const config: Config = {
         "beige-light": "#E0E0D1",
         "orange": "#FFCC80",
         "white": "#F5F6F6",
-      }
+      }, animation: {
+        'spin-slow': 'spin 1.8s linear infinite',
+      },
     },
   },
   plugins: [],
