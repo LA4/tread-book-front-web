@@ -4,6 +4,7 @@ import AddBookForm from "@/components/form/addBookForm";
 import InputField from "@/components/inputField/inputField";
 import Modal from "@/components/modal/modal";
 import Icons from "@/components/svg/Icons";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 export enum BookStatus {
   READ = 'READ',
@@ -27,7 +28,7 @@ export default function AddPage() {
   const [dataFormated, setdataFormated] = useState<BookProps[] | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [choosingBook, setChoosingBook] = useState<BookProps | null>(null)
-
+const router = useRouter()
   const handleInputValue = (data: string) => {
     setValue(data)
   }
@@ -72,6 +73,7 @@ export default function AddPage() {
       title: data.title,
       author: data.author,
       category: data.category,
+      publisher: data.publisher,
       pages: data.pages,
       user: "666877ec019241ca073a9af3",
       created_at: new Date(),
@@ -86,7 +88,9 @@ export default function AddPage() {
         body: JSON.stringify(bookDTO)
       })
       const data = await response.json()
+      router.push('/')
       console.log("data: ", data)
+    
     } catch (error) {
       console.log(error)
     }

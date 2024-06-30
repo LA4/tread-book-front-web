@@ -1,6 +1,5 @@
 'use client'
 import { useState } from "react"
-import Icons from "../svg/Icons"
 import { BookStatus } from "@/app/addBook/page"
 import Modal from "../modal/modal"
 
@@ -17,16 +16,15 @@ type PropsSingleBook = {
 
 export default function SingleBook({ title, pages, author, category, publisher, resume, status, opinion }: PropsSingleBook) {
 
-    const [showResume, setShowResume] = useState<boolean>(false)
     const [activeStatus, setActiveStatus] = useState(status)
-    const handleResume = () => {
-        setShowResume(!showResume)
-    }
+
 
     return (
 
-        <div className="flex p-4 text-[14px] rounded-[18px] bg-olive-light w-[100%] shadow-md shadow-charcol/40 flex-col text-olive-dark font-raleway-normal ">
-
+        <div onClick={()=>{console.log(title)}} className="flex p-4 text-[14px] rounded-[18px] bg-olive-light w-[100%] shadow-md shadow-charcol/40 flex-col text-olive-dark font-raleway-normal ">
+            <Modal>
+              <></>
+            </Modal>
             <div className="flex justify-between font-bold ">
                 <span className="text-[14px]">{title}</span>
                 <span className="flex items-center text-center">{pages} Pages</span>
