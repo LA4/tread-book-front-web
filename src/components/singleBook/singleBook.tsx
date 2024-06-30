@@ -1,6 +1,8 @@
 'use client'
 import { useState } from "react"
 import Icons from "../svg/Icons"
+import { BookStatus } from "@/app/addBook/page"
+import Modal from "../modal/modal"
 
 type PropsSingleBook = {
     title: string,
@@ -9,57 +11,46 @@ type PropsSingleBook = {
     category: string,
     publisher: string,
     resume: string,
-    isReading: boolean,
+    status: BookStatus,
     opinion?: string
 }
 
-export default function SingleBook({ title, pages, author, category, publisher, resume, isReading, opinion }: PropsSingleBook) {
+export default function SingleBook({ title, pages, author, category, publisher, resume, status, opinion }: PropsSingleBook) {
 
     const [showResume, setShowResume] = useState<boolean>(false)
-
+    const [activeStatus, setActiveStatus] = useState(status)
     const handleResume = () => {
         setShowResume(!showResume)
     }
 
     return (
 
-        <div className="flex p-4 rounded-[28px] bg-olive-light w-[100%] shadow-md shadow-charcol/40 flex-col text-olive-dark font-raleway-normal ">
+        <div className="flex p-4 text-[14px] rounded-[18px] bg-olive-light w-[100%] shadow-md shadow-charcol/40 flex-col text-olive-dark font-raleway-normal ">
+
             <div className="flex justify-between font-bold ">
-                <span>{title}</span>
-                {isReading ?
-                    <span><input></input>/ {pages} pages</span>
-                    : <span>{pages} Pages</span>}
+                <span className="text-[14px]">{title}</span>
+                <span className="flex items-center text-center">{pages} Pages</span>
 
             </div>
-            <span className="text-sm">{author}</span>
+            <span className="text-sm"><span className="underline underline-offset-2">Author :</span> {author}</span>
             <div className="flex text-sm justify-between w-80% ">
-                <span>{category}</span>
-                <span>{publisher}</span>
+                <span><span className="underline underline-offset-2">Category :</span> {category}</span>
+                <span><span className="underline underline-offset-2">Publisher :</span> {publisher}</span>
             </div>
-            {
-                isReading ?
-                    <textarea value={opinion} />
-                    : <div
-                        className=" flex justify-center mt-2 transition duration-75 text-sm text-justify"
-                        onClick={() => { handleResume() }}>
-                        {
-                            showResume ?
-                                <div className="flex flex-col items-center">
 
-                                    <div>
-                                        {resume.slice(0, 150)} ...
-                                    </div>
-                                    <div>
-                                        {opinion} dpjefgkhnqmosjlghbmlsjehbnmeljhbn
-                                    </div>
-                                    <Icons name="arrowUp"></Icons>
-                                </div>
+            <div className="flex flex-col items-center text-[12px]">
 
-                                : <Icons name="arrowDown"></Icons>
-                        }
-                    </div>
+                <div className="flex p-2 text-charcol">
+                    {resume.slice(0, 150)} ...
+                </div>
 
-            }
+            </div>
+            <div className="flex gap-2 justify-center font-bold text-olive-light mt-2">
+                {activeStatus === "TO_BE_READ" && <span className="flex bg-white border-1 rounded-lg py-1 px-2 text-[.6rem]">To read</span>}
+                {activeStatus === "READ" && <span className="flex bg-white border-1 rounded-lg py-1 px-2 text-[.6rem]">read</span>}
+                {activeStatus === "CURRENTLY_READING" && <span className="flex bg-white border-1 rounded-lg py-1 px-2 text-[.6rem]">currently reading</span>}
+            </div>
+
         </div>
 
     )

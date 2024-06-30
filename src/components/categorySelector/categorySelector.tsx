@@ -1,29 +1,35 @@
 
+import { BookStatus } from '@/app/addBook/page'
 import React, { useEffect, useState } from 'react'
 
-type categorieProp = {
-    _id: string,
-    name: string
+type StatusProps = {
+    handleStatus: (status: string | undefined) => void
 }
 
-export default function CategorySelector() {
+export default function CategorySelector({ handleStatus }: StatusProps) {
 
-    const [categories, setCategories] = useState<categorieProp[]>([])
-    const getCategories = async () => {
-
-        const response = await fetch("http://localhost:3000/category")
-        const data = await response.json()
-        setCategories([...data])
-    }
-    useEffect(() => {
-        getCategories()
-    }, [])
+    const [status, setStatus] = useState<string>()
 
     return (
-        <div className="flex text-beige-light gap-2 overflow-x-auto w-full">
-            {categories && categories.map((e) => {
-                return <span key={e._id} className="shrink-0 flex bg-charcol w-50 h-8 rounded-[12px] px-2 items-center justify-center">{e.name}</span>
-            })}
-        </div>
+        <div className="flex text-beige-light gap-2 px-2 justify-between overflow-x-auto w-full h-8 border-y-2 border-charcol">
+            <span
+                onClick={() => {
+                    setStatus("Read")
+                    handleStatus("Read")
+                }}
+                className={`flex items-center text-[14px] text-charcol p-2 rounded-lg ${status === "Read" && " font-bold "}`} >Read</span>
+            <span
+                onClick={() => {
+                    setStatus("Reading")
+                    handleStatus("Reading")
+                }}
+                className={`flex items-center text-[14px] p-2 text-charcol rounded-lg ${status === "Reading" && " font-bold "}`}>Currently reading</span>
+            <span
+                onClick={() => {
+                    setStatus("toBeRead")
+                    handleStatus("toBeRead")
+                }}
+                className={`flex items-center text-[14px] p-2 text-charcol rounded-lg ${status === "toBeRead" && " font-bold "}`}>To Read</span>
+        </div >
     )
 }

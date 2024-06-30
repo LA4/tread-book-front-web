@@ -3,6 +3,8 @@
 import CategorySelector from "@/components/categorySelector/categorySelector"
 import SingleBook from "@/components/singleBook/singleBook"
 import { useEffect, useState } from "react"
+import { BookStatus } from "./addBook/page"
+import Modal from "@/components/modal/modal"
 type BooksType = {
   _id: number,
   title: string,
@@ -11,63 +13,69 @@ type BooksType = {
   category: { name: string },
   publisher: string,
   resume: string,
-  isReading: boolean,
-  opinion: string
+  opinion: string,
+  status: BookStatus
 }
 export default function Home() {
-  const [books, setBooks] = useState<BooksType[]>([])
-  const [isReading, setIsReading] = useState<BooksType>()
+  const [books, setBooks] = useState<BooksType[] | null>(null)
+  const [openModal, setOpenModal] = useState<boolean>(false)
 
-  const fetchBooks = async () => {
+  const fetchingAllBooks = async () => {
     try {
-      const response = await fetch(" http://localhost:3000/books/")
+
+      const response = await fetch("http://localhost:3000/books")
       const data = await response.json()
+
       setBooks(data)
     } catch (error) {
       console.error(error)
     }
   }
-  const fetchBookIsReading = async () => {
-    const response = await fetch("http://localhost:3000/books/status/isRead")
-    const data = await response.json()
-    setIsReading(prevData => prevData = data[0])
-    fetchBooks()
+
+
+  const fetchBookFromStatus = async (status: string) => {
+    try {
+      const response = await fetch(`http://localhost:3000/books/status/${status}`)
+      const data = await response.json()
+      setBooks(data)
+      console.log("fetchBookFromStatus:", data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  const handleStatus = (data: any) => {
+    fetchBookFromStatus(data)
   }
   useEffect(() => {
-    fetchBooks()
-    fetchBookIsReading()
+    fetchingAllBooks()
   }, [])
   return (
     <main className="flex p-[12px] flex-col gap-4 my-[70px] py-[24px] "
     >
 
-      {isReading && <SingleBook
-        title={isReading.title}
-        author={isReading.author.name}
-        pages={isReading.pages}
-        resume={isReading.resume}
-        category={isReading.category.name}
-        publisher=""
-        isReading={isReading.isReading}
-        opinion={isReading.opinion}
-      ></SingleBook>}
+
 
       <div>
-        <CategorySelector />
+        <CategorySelector handleStatus={handleStatus} />
       </div>
 
       {
         books && books.map((e: BooksType) => {
-          return <SingleBook
-            key={e._id}
-            title={e.title}
-            author={e.author.name}
-            pages={e.pages}
-            resume={e.resume}
-            category={e.category.name}
-            publisher=""
-            isReading={e.isReading}
-          ></SingleBook>
+          console.log("en bas :", books)
+          if (e !== null) {
+            return <div onClick={() => { setOpenModal(true) }}>
+              <SingleBook
+                key={e._id}
+                title={e.title}
+                author={e.author.name}
+                pages={e.pages}
+                resume={e.resume}
+                category={e.category.name}
+                publisher=""
+                status={e.status}
+              ></SingleBook>
+            </div>
+          }
         })
       }
     </main>

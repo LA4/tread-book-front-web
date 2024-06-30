@@ -23,6 +23,7 @@ const config: Config = {
         "beige-light": "#E0E0D1",
         "orange": "#FFCC80",
         "white": "#F5F6F6",
+        "gray": "#78786D",
       }, animation: {
         'spin-slow': 'spin 1.8s linear infinite',
       },
