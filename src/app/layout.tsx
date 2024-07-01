@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="relative" >
+      <body className="relative">
         <UserHeader username="Ludovic" pages="300" />
         {children}
         <UserFooter />
