@@ -4,11 +4,11 @@ import CategorySelector from "@/components/categorySelector/categorySelector";
 import SingleBook from "@/components/singleBook/singleBook";
 import { useEffect, useState } from "react";
 import { BookStatus } from "./addBook/page";
-import Modal from "@/components/modal/modal";
-type BooksType = {
+export type BooksType = {
   _id: number;
   title: string;
   pages: string;
+  pageRead: number;
   author: { name: string };
   category: { name: string };
   publisher: { name: string };
@@ -37,6 +37,7 @@ export default function Home() {
       );
       const data = await response.json();
       setBooks(data);
+
     } catch (error) {
       console.error(error);
     }
@@ -72,6 +73,7 @@ export default function Home() {
                   category={e.category.name}
                   publisher={e.publisher.name}
                   status={e.status}
+                  pageRead={e.pageRead}
                 ></SingleBook>
               </div>
             );

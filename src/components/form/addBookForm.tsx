@@ -2,14 +2,17 @@ import { BookProps } from '@/app/addBook/page'
 import React, { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Icons from '../svg/Icons'
-type Inputs = {
+export type Inputs = {
     id: string,
     title: string,
     author: string | string[],
     category: string | string[],
     pages: string,
     publisher: string,
-    resume: string
+    opinion?: string,
+    resume: string,
+    status?: string,
+    pageRead?: number
 }
 type FormProps = {
     data: BookProps | null,

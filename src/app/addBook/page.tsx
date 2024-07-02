@@ -79,6 +79,7 @@ export default function AddPage() {
       category: data.category,
       publisher: data.publisher,
       pages: data.pages,
+      pageRead: 0,
       user: "666877ec019241ca073a9af3",
       created_at: new Date(),
       resume: data.resume,
