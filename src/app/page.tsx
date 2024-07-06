@@ -2,8 +2,10 @@
 
 import CategorySelector from "@/components/categorySelector/categorySelector";
 import SingleBook from "@/components/singleBook/singleBook";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { BookStatus } from "./addBook/page";
+import Authentication from "@/hooks/authentication";
+import { useRouter } from "next/navigation";
 export type BooksType = {
   _id: number;
   title: string;
@@ -17,6 +19,20 @@ export type BooksType = {
   status: BookStatus;
 };
 export default function Home() {
+  const router = useRouter()
+  // check authentication
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const isAuthenticated = await Authentication();
+      if (!isAuthenticated) {
+        router.push('auth/login');
+      }
+    }
+    checkAuthentication();
+  }, [])
+
+
+
   const [books, setBooks] = useState<BooksType[] | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -43,6 +59,10 @@ export default function Home() {
     }
   };
   const handleStatus = (data: any) => {
+    if (data === "null") {
+      fetchingAllBooks()
+      return
+    }
     fetchBookFromStatus(data);
   };
   useEffect(() => {
@@ -50,7 +70,7 @@ export default function Home() {
   }, []);
   return (
     <main className="flex p-[12px] flex-col gap-4 my-[70px] py-[24px] ">
-      <div>
+      <div className="flex flex-col gap-2 items-center">
         <CategorySelector handleStatus={handleStatus} />
       </div>
 

@@ -14,6 +14,12 @@ export default function CategorySelector({ handleStatus }: StatusProps) {
         <div className="flex text-beige-light gap-2 px-2 justify-between overflow-x-auto w-full h-8 border-y-2 border-charcol">
             <span
                 onClick={() => {
+                    setStatus("")
+                    handleStatus("null")
+                }}
+                className={`flex items-center text-[14px] text-charcol p-2 rounded-lg ${status === "" && " font-bold "}`} >All</span>
+            <span
+                onClick={() => {
                     setStatus("Read")
                     handleStatus("Read")
                 }}

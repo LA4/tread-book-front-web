@@ -4,6 +4,7 @@ import AddBookForm from "@/components/form/addBookForm";
 import InputField from "@/components/inputField/inputField";
 import Modal from "@/components/modal/modal";
 import Icons from "@/components/svg/Icons";
+import Authentication from "@/hooks/authentication";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 export enum BookStatus {
@@ -23,6 +24,17 @@ export type BookProps = {
 };
 
 export default function AddPage() {
+  // check authentication
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const isAuthenticated = await Authentication();
+
+      if (!isAuthenticated) {
+        router.push('auth/login');
+      }
+    }
+    checkAuthentication();
+  }, [])
   const [value, setValue] = useState("");
   const [modal, setModal] = useState<boolean>(false);
   const [dataFormated, setdataFormated] = useState<BookProps[] | null>(null);

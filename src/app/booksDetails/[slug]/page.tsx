@@ -1,15 +1,27 @@
 "use client";
-import { BookProps } from "@/app/addBook/page";
+
 import { BooksType } from "@/app/page";
 import { Inputs } from "@/components/form/addBookForm";
 import Modal from "@/components/modal/modal";
 import Icons from "@/components/svg/Icons";
+import Authentication from "@/hooks/authentication";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 
 export default function BooksDetails({ params }: { params: { slug: string } }) {
+
+  // check authentication
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const isAuthenticated = await Authentication();
+      if (!isAuthenticated) {
+        router.push('auth/login');
+      }
+    }
+    checkAuthentication();
+  }, [])
   const router = useRouter()
   const [bookData, setBookData] = useState<BooksType | null>(null);
   const [openResume, setOpenResume] = useState<boolean>(false)
@@ -19,9 +31,7 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
     try {
       const response = await fetch(`http://localhost:3000/books/${id}`);
       const data = await response.json();
-      console.log("data", data)
       setBookData((prev) => prev = data)
-      console.log(bookData)
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +86,6 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
   }, [bookData, setValue])
   const onsubmit: SubmitHandler<Inputs> = (data) => {
     fetchUpdateBook(data)
-    console.log("fetch data", data)
   }
 
   return (
@@ -104,27 +113,31 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
               <span className="flex w-1/5 text-olive-light">/ {bookData.pages}</span>
             </div>
 
-            <select {...register("status")} className="text-charcol flex bg-olive-light rounded-t-lg" >
+            <select {...register("status")} className="text-charcol flex bg-olive-light rounded-lg w-[250px] text-center" >
               <option className="text-charcol" value="CURRENTLY_READING">Currently Reading</option>
               <option className="text-charcol" value="TO_BE_READ">To Read</option>
               <option className="text-charcol" value="READ">Read</option>
             </select>
 
-            <label htmlFor="title" className="flex flex-col items-center text-center justify-center">{bookData?.title}
-              <input className="text-center bg-charcol flex p-1 rounded-t-lg w-full text-[.8rem] text-olive-light border-b-2 h-6" {...register("title")} />
+            <label htmlFor="title" className="flex flex-col items-center text-center justify-center">
+              <input className="text-center bg-charcol flex p-1 rounded-t-lg text-[1.2rem] text-olive-light border-b-2 h" {...register("title")} />
             </label>
 
-            <label htmlFor="author" className="flex flex-col items-center text-center justify-center">{bookData?.author.name}
-              <input className=" text-center bg-charcol flex p-1 rounded-t-lg w-full text-[.8rem] text-olive-light border-b-2 h-6" {...register("author")} />
+            <label htmlFor="author" className="flex gap-3 items-center text-center justify-center">
+              <span className="flex text-[.8rem] w-1/2">Author :</span>
+              <input className="w-1/2 text-center bg-charcol flex p-1 rounded-t-lg w-full text-[.8rem] text-olive-light border-b-2 h-6" {...register("author")} />
             </label>
 
-            <label htmlFor="category" className="flex flex-col items-center text-center justify-center">{bookData?.category.name}
-              <input className=" text-center bg-charcol flex p-1 rounded-t-lg w-full text-[.8rem] text-olive-light border-b-2 h-6" {...register("category")} />
+            <label htmlFor="category" className="flex gap-3 items-center text-center justify-center">
+              <span className="flex text-[.8rem] w-1/2">Category :</span>
+              <input className="w-1/2 text-center bg-charcol flex p-1 rounded-t-lg w-full text-[.8rem] text-olive-light border-b-2 h-6" {...register("category")} />
+            </label>
+            <label htmlFor="publisher" className="flex gap-3 items-center text-center justify-center">
+              <span className="flex text-[.8rem] w-1/2">Publisher :</span>
+              <input className="w-1/2 text-center bg-charcol flex p-1 rounded-t-lg w-full text-[.8rem] text-olive-light border-b-2 h-6" {...register("publisher")} />
             </label>
 
-            <label htmlFor="publisher" className="flex flex-col items-center text-center justify-center">{bookData?.publisher.name}
-              <input className=" text-center bg-charcol flex p-1 rounded-t-lg w-full text-[.8rem] text-olive-light border-b-2 h-6" {...register("publisher")} />
-            </label>
+
 
             {openResume ?
               <div className='flex flex-col w-full'>
@@ -137,8 +150,8 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
               </div>
             }
 
-            <label htmlFor="opinion" className="flex w-full">
-              <textarea className='flex p-2 h-[100px] rounded-t-lg w-screen text-charcol m-2'  {...register("opinion")} />
+            <label htmlFor="opinion" className="flex w-[80%] flex-col font-bold"> <span>What about ?</span>
+              <textarea className='flex p-2 h-[200px] rounded-t-lg text-charcol m-1 bg-charcol border-2 border-olive-light text-olive-light'  {...register("opinion")} />
 
             </label>
             <button className="flex h-[70px] items-center underline underline-offset-4" type="submit">Update</button>
