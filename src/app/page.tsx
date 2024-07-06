@@ -1,104 +1,16 @@
-"use client";
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
 
-import CategorySelector from "@/components/categorySelector/categorySelector";
-import SingleBook from "@/components/singleBook/singleBook";
-import { useEffect, useReducer, useState } from "react";
-import { BookStatus } from "./addBook/page";
-import Authentication from "@/hooks/authentication";
-import { useRouter } from "next/navigation";
-export type BooksType = {
-  _id: number;
-  title: string;
-  pages: string;
-  pageRead: number;
-  author: { name: string };
-  category: { name: string };
-  publisher: { name: string };
-  resume: string;
-  opinion: string;
-  status: BookStatus;
-};
-export default function Home() {
-  const router = useRouter()
-  // check authentication
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      const isAuthenticated = await Authentication();
-      if (!isAuthenticated) {
-        router.push('auth/login');
-      }
-    }
-    checkAuthentication();
-  }, [])
+export default function page() {
+    return (
+        <div className='flex h-screen w-screen bg-background bg-cover bg-center flex-col justify-center items-center '>
 
-
-
-  const [books, setBooks] = useState<BooksType[] | null>(null);
-  const [openModal, setOpenModal] = useState<boolean>(false);
-
-  const fetchingAllBooks = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/books");
-      const data = await response.json();
-      setBooks(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchBookFromStatus = async (status: string) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/books/status/${status}`
-      );
-      const data = await response.json();
-      setBooks(data);
-
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const handleStatus = (data: any) => {
-    if (data === "null") {
-      fetchingAllBooks()
-      return
-    }
-    fetchBookFromStatus(data);
-  };
-  useEffect(() => {
-    fetchingAllBooks();
-  }, []);
-  return (
-    <main className="flex p-[12px] flex-col gap-4 my-[70px] py-[24px] ">
-      <div className="flex flex-col gap-2 items-center">
-        <CategorySelector handleStatus={handleStatus} />
-      </div>
-
-      {books &&
-        books.map((e: BooksType) => {
-          if (e !== null) {
-            return (
-              <div
-                key={e._id}
-                onClick={() => {
-                  setOpenModal(true);
-                }}
-              >
-                <SingleBook
-                  id={e._id.toString()}
-                  title={e.title}
-                  author={e.author.name}
-                  pages={e.pages}
-                  resume={e.resume}
-                  category={e.category.name}
-                  publisher={e.publisher.name}
-                  status={e.status}
-                  pageRead={e.pageRead}
-                ></SingleBook>
-              </div>
-            );
-          }
-        })}
-    </main>
-  );
+            <h1 className='text-white font-bold text-[5rem] leading-none text-center z-10'>Thread Book</h1>
+            <div className='flex   w-screen opacity-40 h-screen bg-charcol absolute gap-10 '>
+            </div>
+            <Link
+                className=' flex w-[200] h-200 justify-center items-center z-50 text-white text-[1.5rem] underline-offset-4 underline leading-none' href={'/home'}>enter</Link>
+        </div >
+    )
 }

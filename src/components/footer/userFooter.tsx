@@ -10,7 +10,7 @@ export default function UserFooter() {
     return (
         <footer className="flex h-[70px] bg-white items-center fixed bottom-0 w-full z-40"
         >
-            <Link href="/" className="flex justify-center flex-col items-center text-[12px] gap-1 w-1/3">
+            <Link href="/home" className="flex justify-center flex-col items-center text-[12px] gap-1 w-1/3">
 
                 <Icons name="home"></Icons>
                 <span>Home</span>

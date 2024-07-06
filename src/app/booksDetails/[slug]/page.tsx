@@ -1,6 +1,6 @@
 "use client";
 
-import { BooksType } from "@/app/page";
+import { BooksType } from "@/app/(pages)/home/page";
 import { Inputs } from "@/components/form/addBookForm";
 import Modal from "@/components/modal/modal";
 import Icons from "@/components/svg/Icons";

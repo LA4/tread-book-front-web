@@ -1,4 +1,4 @@
-import { BookProps } from '@/app/addBook/page'
+import { BookProps } from '@/app/(pages)/addBook/page'
 import React, { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Icons from '../svg/Icons'

@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -35,12 +36,11 @@ export default function SignUP() {
         }
         if (data.access_token) {
             document.cookie = `access_token=${data.access_token}; path=/; samesite=strict`
-
-            router.push('auth/login')
+            router.push('/home')
         }
     }
     return (
-        <div className=' flex-col flex pt-[100px] h-screen justify-center items-center'>
+        <div className=' flex-col w-screen bg-background  bg-cover bg-center flex pt-[100px] h-screen justify-center items-center'>
             <h4>Sign up</h4>
             <form className='flex gap-2 flex-col items-center' action="" onSubmit={handleSubmit(onSubmit)}>
                 {errors.root?.serverError !== undefined && <div className='flex flex-col text-[red] text-[.7rem]'>{errors.root?.serverError.message}</div>}
@@ -58,6 +58,7 @@ export default function SignUP() {
                 })} />
                 <button type="submit"> Register</button>
             </form>
+            <Link href={"/auth/login"}>You already have an accout ?</Link>
         </div>
     )
 }

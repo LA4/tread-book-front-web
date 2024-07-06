@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { BookStatus } from "@/app/addBook/page";
+import { BookStatus } from "@/app/(pages)/addBook/page";
 import { useRouter } from "next/navigation";
 import { ParsedUrlQueryInput } from "querystring";
 

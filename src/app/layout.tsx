@@ -13,13 +13,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <body className="relative">
-        <UserHeader username="Ludovic" pages="300" />
-        {children}
-        <UserFooter />
+        <main>{children}</main>
       </body>
     </html>
   );

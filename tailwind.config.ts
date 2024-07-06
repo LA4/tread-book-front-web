@@ -12,9 +12,10 @@ const config: Config = {
     },
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "background-gradient": "rgb(43,74,74)",
+        "gradient": "linear-gradient(0deg, rgba(43,74,74,1) 41%, rgba(70,93,79,1) 65%, rgba(167,160,95,1) 100%)",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'background': "url('/assets/images/background.jpg')",
       },
       colors: {
         "charcol": "#58594D",
