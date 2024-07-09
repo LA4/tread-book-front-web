@@ -18,12 +18,12 @@ export default async function Authentication() {
         });
 
         const data = await response.json();
+        console.log(data)
         if (data.result) {
-            return true
+            return data
         }
         if (data.statusCode === 401) {
-            console.log(data)
-            return false
+            return { result: false }
         }
     } catch (error) {
         console.error("Erreur lors de la requête de connexion :", error);

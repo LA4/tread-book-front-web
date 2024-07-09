@@ -6,6 +6,7 @@ import { useEffect, useReducer, useState } from "react";
 import { BookStatus } from "../addBook/page";
 import Authentication from "@/hooks/authentication";
 import { useRouter } from "next/navigation";
+import Error from "next/error";
 export type BooksType = {
   _id: number;
   title: string;
@@ -20,19 +21,6 @@ export type BooksType = {
 };
 export default function Home() {
   const router = useRouter()
-  // check authentication
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      const isAuthenticated = await Authentication();
-      if (!isAuthenticated) {
-        router.push('auth/login');
-      }
-    }
-    checkAuthentication();
-  }, [])
-
-
-
   const [books, setBooks] = useState<BooksType[] | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -42,7 +30,7 @@ export default function Home() {
       const data = await response.json();
       setBooks(data);
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   };
 

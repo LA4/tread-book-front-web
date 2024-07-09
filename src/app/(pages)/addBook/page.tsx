@@ -24,17 +24,7 @@ export type BookProps = {
 };
 
 export default function AddPage() {
-  // check authentication
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      const isAuthenticated = await Authentication();
 
-      if (!isAuthenticated) {
-        router.push('auth/login');
-      }
-    }
-    checkAuthentication();
-  }, [])
   const [value, setValue] = useState("");
   const [modal, setModal] = useState<boolean>(false);
   const [dataFormated, setdataFormated] = useState<BookProps[] | null>(null);

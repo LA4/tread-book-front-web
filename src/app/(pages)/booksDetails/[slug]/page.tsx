@@ -12,16 +12,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 export default function BooksDetails({ params }: { params: { slug: string } }) {
 
-  // check authentication
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      const isAuthenticated = await Authentication();
-      if (!isAuthenticated) {
-        router.push('auth/login');
-      }
-    }
-    checkAuthentication();
-  }, [])
   const router = useRouter()
   const [bookData, setBookData] = useState<BooksType | null>(null);
   const [openResume, setOpenResume] = useState<boolean>(false)
@@ -57,14 +47,14 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
       body: JSON.stringify(bookToUpdate)
     })
     const data = await response.json()
-    router.push('/')
+    router.push('/home')
   }
   const fetchDeleteBook = async (id: number) => {
     const response = await fetch(`http://localhost:3000/books/delete/${id}`,
       { method: "DELETE" }
     )
     const data = await response.json()
-    router.push('/')
+    router.push('/home')
 
   }
   useEffect(() => {
@@ -94,7 +84,7 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
         bookData && (
           <form className="flex w-full justify-center items-center flex-col gap-2 p-2" onSubmit={handleSubmit(onsubmit)}>
             <div className="flex justify-between w-full px-4">
-              <span className="flex h-[30px] items-center underline underline-offset-4" onClick={() => { router.push('/') }}>return</span>
+              <span className="flex h-[30px] items-center underline underline-offset-4" onClick={() => { router.push('/home') }}>return</span>
               {!openModal && <span className="flex h-[30px] items-center underline underline-offset-4" onClick={() => { setOpenModal(!openModal) }}>DELETE</span>}
               {openModal &&
                 <Modal>

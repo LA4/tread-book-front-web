@@ -3,8 +3,7 @@ import UserHeader from "@/components/header/userHeader";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Thead book",
-    description: "",
+    title: "Thead book - login",
 };
 
 export default function RootLayout({
@@ -14,7 +13,6 @@ export default function RootLayout({
 }>) {
     return (
         <>
-
             {children}
         </>
     );

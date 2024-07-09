@@ -14,7 +14,6 @@ export default function Login() {
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm<Inputs>()
     const router = useRouter()
     const fetchLogin = async (logs: Inputs) => {
-        console.log(logs)
         const response = await fetch("http://localhost:3000/auth/signIn", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
