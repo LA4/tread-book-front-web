@@ -3,10 +3,12 @@
 import AddBookForm from "@/components/form/addBookForm";
 import InputField from "@/components/inputField/inputField";
 import Modal from "@/components/modal/modal";
+import { RootState } from "@/components/provider/reduxProvider";
 import Icons from "@/components/svg/Icons";
-import Authentication from "@/hooks/authentication";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+const API_THREADBOOK = process.env.API_THREADBOOK
 export enum BookStatus {
   READ = "READ",
   CURRENTLY_READING = "CURRENTLY_READING",
@@ -30,6 +32,9 @@ export default function AddPage() {
   const [dataFormated, setdataFormated] = useState<BookProps[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [choosingBook, setChoosingBook] = useState<BookProps | null>(null);
+  const [error, setError] = useState<string>("")
+  const user = useSelector((state: RootState) => state.user.value)
+
   const router = useRouter();
   const handleInputValue = (data: string) => {
     setValue(data);
@@ -74,7 +79,6 @@ export default function AddPage() {
     setModal(false);
   };
   const handleFormData = async (data: any) => {
-    console.log(data, data.category, data.author);
     const bookDTO = {
       title: data.title,
       author: data.author,
@@ -82,20 +86,24 @@ export default function AddPage() {
       publisher: data.publisher,
       pages: data.pages,
       pageRead: 0,
-      user: "666877ec019241ca073a9af3",
+      user: user.user_id,
       created_at: new Date(),
       resume: data.resume,
       opinion: "",
       status: BookStatus.CURRENTLY_READING,
     };
     try {
-      const response = await fetch("http://localhost:3000/books/new", {
+      const response = await fetch(`${API_THREADBOOK}books/new`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookDTO),
       });
       const data = await response.json();
-      router.push("/");
+      if (data.statusCode) {
+        setError(data.message)
+        return
+      }
+      router.push("/home");
     } catch (error) {
       console.log(error);
     }
@@ -103,6 +111,7 @@ export default function AddPage() {
 
   return (
     <main className="flex p-[12px] flex-col gap-4 my-[70px] py-[24px] ">
+
       {modal && (
         <Modal>
           <div className="flex absolute w-screen bg-olive-light h-screen left-0 top-0 flex-col items-center">
@@ -173,7 +182,7 @@ export default function AddPage() {
         </Modal>
       )}
       <h4 className="flex justify-center w-full ">Reading a new book</h4>
-
+      {error && <span className="flex text-orange bg-charcol p-2 justify-center">{error}</span>}
       <div className="flex gap-4 px-2 items-center">
         <InputField
           placeholder="Search a book"

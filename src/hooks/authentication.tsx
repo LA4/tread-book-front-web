@@ -6,7 +6,7 @@ export default async function Authentication() {
         ?.split("=")[1];
 
     if (!currentUser) {
-        return false
+        return { result: false }
     }
     try {
         const response = await fetch('http://localhost:3000/auth/login', {
@@ -18,7 +18,6 @@ export default async function Authentication() {
         });
 
         const data = await response.json();
-        console.log(data)
         if (data.result) {
             return data
         }
@@ -27,6 +26,6 @@ export default async function Authentication() {
         }
     } catch (error) {
         console.error("Erreur lors de la requête de connexion :", error);
-        return false
+        return { result: false }
     }
 }

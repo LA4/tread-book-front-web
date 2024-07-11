@@ -1,8 +1,11 @@
 'use client'
+
+import { user } from '@/store/userReducer'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
 
 type Inputs = {
@@ -11,8 +14,10 @@ type Inputs = {
 }
 
 export default function Login() {
+
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm<Inputs>()
     const router = useRouter()
+    const dispatch = useDispatch()
     const fetchLogin = async (logs: Inputs) => {
         const response = await fetch("http://localhost:3000/auth/signIn", {
             method: "POST",
@@ -20,16 +25,22 @@ export default function Login() {
             body: JSON.stringify(logs)
         })
         const data = await response.json()
-        console.log("login:", data)
+
         if (!data.error) {
-            document.cookie = `access_token=${data.access_token}; path=/; samesite=strict`
+            console.log(data)
+            dispatch(user({
+                user_id: data.user._id,
+                username: data.user.username,
+                email: data.user.email
+            }))
+            document.cookie = `access_token=${data.token.access_token}; path=/; samesite=strict`
             router.push('/home')
         }
     }
 
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data)
+
         fetchLogin(data)
         reset()
     }

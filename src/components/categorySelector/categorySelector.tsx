@@ -21,19 +21,19 @@ export default function CategorySelector({ handleStatus }: StatusProps) {
             <span
                 onClick={() => {
                     setStatus("Read")
-                    handleStatus("Read")
+                    handleStatus("READ")
                 }}
                 className={`flex items-center text-[14px] text-charcol p-2 rounded-lg ${status === "Read" && " font-bold "}`} >Read</span>
             <span
                 onClick={() => {
                     setStatus("Reading")
-                    handleStatus("Reading")
+                    handleStatus("CURRENTLY_READING")
                 }}
                 className={`flex items-center text-[14px] p-2 text-charcol rounded-lg ${status === "Reading" && " font-bold "}`}>Currently reading</span>
             <span
                 onClick={() => {
                     setStatus("toBeRead")
-                    handleStatus("toBeRead")
+                    handleStatus("TO_BE_READ")
                 }}
                 className={`flex items-center text-[14px] p-2 text-charcol rounded-lg ${status === "toBeRead" && " font-bold "}`}>To Read</span>
         </div >

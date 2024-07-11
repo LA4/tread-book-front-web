@@ -3,15 +3,16 @@
 import { BooksType } from "@/app/(pages)/home/page";
 import { Inputs } from "@/components/form/addBookForm";
 import Modal from "@/components/modal/modal";
+import { RootState } from "@/components/provider/reduxProvider";
 import Icons from "@/components/svg/Icons";
-import Authentication from "@/hooks/authentication";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-
+import { useSelector } from "react-redux";
+const API_THREADBOOK = process.env.API_THREADBOOK
 
 export default function BooksDetails({ params }: { params: { slug: string } }) {
-
+  const user = useSelector((state: RootState) => state.user.value)
   const router = useRouter()
   const [bookData, setBookData] = useState<BooksType | null>(null);
   const [openResume, setOpenResume] = useState<boolean>(false)
@@ -19,7 +20,7 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<Inputs>()
   const fetchDetailsById = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/books/${id}`);
+      const response = await fetch(`${API_THREADBOOK}books/${id}/${user.user_id}`);
       const data = await response.json();
       setBookData((prev) => prev = data)
     } catch (error) {
@@ -41,20 +42,20 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
     }
 
 
-    const response = await fetch("http://localhost:3000/books/update", {
+    const response = await fetch(`${API_THREADBOOK}books/update/${user.user_id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookToUpdate)
     })
     const data = await response.json()
-    router.push('/home')
+    router.replace('/home')
   }
   const fetchDeleteBook = async (id: number) => {
-    const response = await fetch(`http://localhost:3000/books/delete/${id}`,
+    const response = await fetch(`http://localhost:3000/books/delete/${id}/${user.user_id}`,
       { method: "DELETE" }
     )
     const data = await response.json()
-    router.push('/home')
+    router.replace('/home')
 
   }
   useEffect(() => {
@@ -84,7 +85,7 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
         bookData && (
           <form className="flex w-full justify-center items-center flex-col gap-2 p-2" onSubmit={handleSubmit(onsubmit)}>
             <div className="flex justify-between w-full px-4">
-              <span className="flex h-[30px] items-center underline underline-offset-4" onClick={() => { router.push('/home') }}>return</span>
+              <span className="flex h-[30px] items-center underline underline-offset-4" onClick={() => { router.replace('/home') }}>return</span>
               {!openModal && <span className="flex h-[30px] items-center underline underline-offset-4" onClick={() => { setOpenModal(!openModal) }}>DELETE</span>}
               {openModal &&
                 <Modal>

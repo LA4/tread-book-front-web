@@ -1,9 +1,11 @@
 'use client'
 
+import { user } from '@/store/userReducer'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 
 
 type Inputs = {
@@ -14,9 +16,9 @@ type Inputs = {
 
 export default function SignUP() {
     const router = useRouter()
+    const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, setError, reset } = useForm<Inputs>()
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data)
         fetchSignUp(data)
         // reset()
     }
@@ -34,8 +36,13 @@ export default function SignUP() {
                 message: data.message
             })
         }
-        if (data.access_token) {
-            document.cookie = `access_token=${data.access_token}; path=/; samesite=strict`
+        if (data.token.access_token) {
+            dispatch(user({
+                user_id: data.user._id,
+                username: data.user.username,
+                email: data.user.email
+            }))
+            document.cookie = `access_token=${data.token.access_token}; path=/; samesite=strict`
             router.push('/home')
         }
     }
