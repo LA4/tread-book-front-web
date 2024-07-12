@@ -41,7 +41,6 @@ export default function Home() {
     }
   };
   const countPage = (countPage: number, limitOfDocuments: number) => {
-    console.log("count page:", countPage)
     let listPages = []
     for (let i = 0; i < Math.ceil(countPage / limitOfDocuments); i++) {
       listPages.push(i)

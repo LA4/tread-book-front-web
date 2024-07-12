@@ -1,13 +1,13 @@
 'use client'
 
-import { user } from '@/store/userReducer'
+import { avatar, user } from '@/store/userReducer'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 
-
+const API_THREADBOOK = process.env.API_THREADBOOK
 type Inputs = {
     email: string,
     password: string
@@ -27,7 +27,9 @@ export default function Login() {
         const data = await response.json()
 
         if (!data.error) {
-            console.log(data)
+            console.log("login:", data)
+            const res2 = await fetch(`${API_THREADBOOK}files/${data.user.avatar}`)
+            dispatch(avatar(res2.url))
             dispatch(user({
                 user_id: data.user._id,
                 username: data.user.username,

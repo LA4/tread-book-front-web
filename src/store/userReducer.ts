@@ -7,6 +7,7 @@ export interface userState {
         username: string | null,
         email: string | null,
         pages?: number | null
+        avatar?: string | null
     }
 }
 
@@ -33,10 +34,14 @@ export const userSlice = createSlice({
             state.value.username = null
             state.value.email = null
             state.value.pages = null
+            state.value.avatar = null
+        },
+        avatar: (state, action: PayloadAction<string>) => {
+            state.value.avatar = action.payload;
         }
     },
 })
 
-export const { user, logout } = userSlice.actions
+export const { user, logout, avatar } = userSlice.actions
 
 export default userSlice.reducer
