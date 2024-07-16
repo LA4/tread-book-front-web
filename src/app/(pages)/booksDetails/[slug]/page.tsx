@@ -78,9 +78,13 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
   const onsubmit: SubmitHandler<Inputs> = (data) => {
     fetchUpdateBook(data)
   }
+  const handleFavorite = () => {
+
+  }
 
   return (
-    <div className="flex h-full w-screen bg-charcol text-white my-[80px]">
+
+    <div className="flex flex-col justify-center items-center h-full w-screen bg-charcol text-white my-[80px]">
       {
         bookData && (
           <form className="flex w-full justify-center items-center flex-col gap-2 p-2" onSubmit={handleSubmit(onsubmit)}>
@@ -147,9 +151,15 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
             </label>
             <button className="flex h-[70px] items-center underline underline-offset-4" type="submit">Update</button>
           </form>
-
         )
       }
+      <span
+        onClick={() => {
+          handleFavorite()
+        }}
+        className="flex h-[70px] items-center underline underline-offset-4"
+      >add to favorite</span>
     </div >
+
   );
 }
