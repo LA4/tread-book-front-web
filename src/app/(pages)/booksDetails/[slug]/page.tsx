@@ -5,14 +5,16 @@ import { Inputs } from "@/components/form/addBookForm";
 import Modal from "@/components/modal/modal";
 import { RootState } from "@/components/provider/reduxProvider";
 import Icons from "@/components/svg/Icons";
+import { pageRead } from "@/store/userReducer";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const API_THREADBOOK = process.env.API_THREADBOOK
 
 export default function BooksDetails({ params }: { params: { slug: string } }) {
   const user = useSelector((state: RootState) => state.user.value)
+  const dispatch = useDispatch()
   const router = useRouter()
   const [bookData, setBookData] = useState<BooksType | null>(null);
   const [openResume, setOpenResume] = useState<boolean>(false)
@@ -40,14 +42,15 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
       opinion: bookUpdate.opinion,
       status: bookUpdate.status
     }
-
-
     const response = await fetch(`${API_THREADBOOK}books/update/${user.user_id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookToUpdate)
     })
     const data = await response.json()
+    if (data.userPages) {
+      dispatch(pageRead(data.userPages))
+    }
     router.replace('/home')
   }
   const fetchDeleteBook = async (id: number) => {

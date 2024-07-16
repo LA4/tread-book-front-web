@@ -27,13 +27,13 @@ export default function Login() {
         const data = await response.json()
 
         if (!data.error) {
-            console.log("login:", data)
-            const res2 = await fetch(`${API_THREADBOOK}files/${data.user.avatar}`)
-            dispatch(avatar(res2.url))
+            const profilePicture = await fetch(`${API_THREADBOOK}files/${data.user.avatar}`)
+            dispatch(avatar(profilePicture.url))
             dispatch(user({
                 user_id: data.user._id,
                 username: data.user.username,
-                email: data.user.email
+                email: data.user.email,
+                pages: data.user.pageRead
             }))
             document.cookie = `access_token=${data.token.access_token}; path=/; samesite=strict`
             router.push('/home')

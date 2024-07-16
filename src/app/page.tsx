@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-export default function page() {
+export default function Page() {
     return (
         <div className='flex h-screen w-screen bg-background bg-cover bg-center flex-col justify-center items-center '>
 

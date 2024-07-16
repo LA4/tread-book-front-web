@@ -11,7 +11,7 @@ import { useEffect, useState } from "react"
 export default function UserHeader() {
     const userStore = useSelector((state: RootState) => state.user.value)
     const [user, setUser] = useState(userStore)
-    const dispatch = useDispatch()
+
     const router = useRouter()
 
     useEffect(() => {

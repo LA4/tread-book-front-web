@@ -16,7 +16,8 @@ const initialState: userState = {
         user_id: null,
         username: null,
         email: null,
-        pages: null
+        pages: null,
+        avatar: null
     }
 }
 
@@ -28,6 +29,7 @@ export const userSlice = createSlice({
             state.value.user_id = action.payload.user_id;
             state.value.username = action.payload.username;
             state.value.email = action.payload.email;
+            state.value.pages = action.payload.pages;
         },
         logout: (state) => {
             state.value.user_id = null
@@ -38,10 +40,13 @@ export const userSlice = createSlice({
         },
         avatar: (state, action: PayloadAction<string>) => {
             state.value.avatar = action.payload;
+        },
+        pageRead: (state, action: PayloadAction<number>) => {
+            state.value.pages = action.payload;
         }
     },
 })
 
-export const { user, logout, avatar } = userSlice.actions
+export const { user, logout, avatar, pageRead } = userSlice.actions
 
 export default userSlice.reducer
