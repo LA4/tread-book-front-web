@@ -5,7 +5,7 @@ import Authentication from "@/hooks/authentication";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
+export default function Layout({ children, }: Readonly<{ children: React.ReactNode; }>) {
 
   const router = useRouter()
   const pathname = usePathname();

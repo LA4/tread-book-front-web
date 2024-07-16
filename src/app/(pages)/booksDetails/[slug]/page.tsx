@@ -78,8 +78,14 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
   const onsubmit: SubmitHandler<Inputs> = (data) => {
     fetchUpdateBook(data)
   }
-  const handleFavorite = () => {
-
+  const handleFavorite = async () => {
+    const response = await fetch(`${API_THREADBOOK}favorite`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: user.user_id, bookId: params.slug })
+    })
+    const data = await response.json()
+    console.log(data)
   }
 
   return (

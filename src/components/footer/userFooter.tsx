@@ -22,7 +22,7 @@ export default function UserFooter() {
                 <span>Add book</span>
 
             </Link>
-            <Link href="/actualBook" className="flex justify-center flex-col items-center text-[12px] gap-1 w-1/3">
+            <Link href="/favorite" className="flex justify-center flex-col items-center text-[12px] gap-1 w-1/3">
 
                 <Icons name="book"></Icons>
                 <span>My reading book</span>

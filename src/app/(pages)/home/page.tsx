@@ -76,7 +76,7 @@ export default function Home() {
       return
     }
     fetchingAllBooks()
-  }, [paginate]);
+  }, [paginate, status]);
   return (
     <main className="bg-background-gradient bg-gradient  flex p-[12px] flex-col gap-4 my-[70px] py-[24px] ">
       <div className="flex flex-col gap-2 items-center bg-beige-light   ">
@@ -113,7 +113,6 @@ export default function Home() {
           {pageCount.length > 1 && pageCount.map((e, i) => {
             return <li className={`flex bg-charcol p-2 ${e + 1 === page ? 'text-olive-light' : 'text-olive-dark'}`}
               onClick={() => {
-                console.log(e, e * limitOfPage)
                 setPage(e + 1)
                 setPaginate(e * limitOfPage)
               }} key={i}>{e + 1}</li>
