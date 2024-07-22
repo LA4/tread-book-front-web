@@ -19,14 +19,16 @@ export default function UserHeader() {
     }, [userStore])
 
     return (
-        <header className="flex justify-between px-6 py-4 bg-olive-dark text-beige-light items-center fixed top-0 w-full ">
-            <span onClick={() => router.replace('/profile')} className="flex rounded-full w-[50px] h-[50px] border-2 bg-cover bg-center" style={{ backgroundImage: `url(${user.avatar})` }}>
-            </span>
-            <span>{user.username}</span>
-            <div className=" flex flex-col items-center">
-                <span className="text-orange font-bold text-lg">{user.pages}</span>
-                <span className="text-sm font-bold">Pages</span>
+        <header className="flex justify-center px-12 py-4 bg-charcol items-center fixed top-0 shadow-lg w-full shadow-charcol/30 rounded-b-full h-[70px]">
+            <div className="flex max-w-[600px] justify-between text-olive-light items-center w-full ">
+                <span onClick={() => router.replace('/profile')} className="flex cursor-pointer rounded-full w-[50px] h-[50px] border-2 bg-cover bg-center" style={{ backgroundImage: `url(${user.avatar})` }}>
+                </span>
+                <span className="text-white font-bold capitalize">{user.username}</span>
+                <div className=" flex jystify-between items-center gap-2">
+                    <span className="text-gold text-lg">{user.pages}</span>
+                    <span className="text-[.8rem] text-olive-dark"> Pages</span>
 
+                </div>
             </div>
         </header>
     )

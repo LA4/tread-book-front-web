@@ -31,7 +31,6 @@ export default function SingleBook({
 }: PropsSingleBook) {
     const [activeStatus, setActiveStatus] = useState(status);
     const router = useRouter();
-    const query: ParsedUrlQueryInput = { id: id };
     return (
         <div
             onClick={() => {
@@ -39,49 +38,47 @@ export default function SingleBook({
                     router.push(`/booksDetails/${id}`);
                 }
             }}
-            className="flex p-4 text-[14px] rounded-[18px] bg-olive-light w-[100%] shadow-md shadow-charcol/40 flex-col text-olive-dark font-raleway-normal "
+            className="flex p-4 text-[14px] rounded-[8px] bg-white border-2 border-beige-light w-[300px]  items-center shadow-md shadow-charcol/30 flex-col text-olive-dark font-raleway-normal "
         >
-            <div className="flex justify-between font-bold ">
-                <span className="text-[14px]">{title}</span>
-                <div className="flex items-center text-center">
-                    <span className="text-chacol">{pageRead}/</span>
-                    <span className="text-white text-[.6rem]">{pages}p.</span>
+            <div className="flex justify-between flex-col">
+                <h4 className="text-[18px] text-left mb-2 underline underline-offset-4">{title}</h4>
+                <div className="flex items-center justify-center gap-2 text-center">
+                    <span className="text-accent font-bold">{pageRead}</span>
+                    <span className="text-gold text-[.7rem]"> / {pages}  pages</span>
                 </div>
             </div>
-            <span className="text-sm">
-                <span className="underline underline-offset-2">Author :</span> {author}
-            </span>
-            <div className="flex text-sm justify-between w-80% ">
-                <span className="flex-wrap flex">
-                    <span className="underline underline-offset-2">Category :</span>{" "}
-                    {category}
-                </span>
-                <span className="flex-wrap flex">
-                    <span className=" underline underline-offset-2">Publisher :</span>{" "}
-                    {publisher}
-                </span>
+
+            <div className="flex flex-col text-sm w-full">
+                <span className="text-olive-light">Author :</span>
+                <span className="w-full bg-gray  px-2">{author}</span>
+                <span className="text-olive-light">Category :</span>
+                <span className="w-full bg-gray px-2">{category}</span>
+
+                <span className="text-olive-light">Publisher :</span>
+                <span className="w-full bg-gray px-2">{publisher}</span>
+
             </div>
 
             <div className="flex flex-col items-center text-[12px]">
                 <div className="flex p-2 text-charcol">{resume.slice(0, 150)} ...</div>
             </div>
-            <div className="flex gap-2 justify-center font-bold text-olive-light mt-2">
+            <div className="flex gap-2 justify-end font-bold text-olive-light w-full  mt-2">
                 {activeStatus === "TO_BE_READ" && (
-                    <span className="flex bg-white border-1 rounded-lg py-1 px-2 text-[.6rem]">
+                    <span className="flex border-2 border-olive-light  border-1 rounded-lg py-1 px-2 text-[.6rem]">
                         To read
                     </span>
                 )}
                 {activeStatus === "READ" && (
-                    <span className="flex bg-white border-1 rounded-lg py-1 px-2 text-[.6rem]">
+                    <span className="flex border-2 border-olive-light  border-1 rounded-lg py-1 px-2 text-[.6rem]">
                         read
                     </span>
                 )}
                 {activeStatus === "CURRENTLY_READING" && (
-                    <span className="flex bg-white border-1 rounded-lg py-1 px-2 text-[.6rem]">
+                    <span className="flex border-2 border-olive-light  border-1 rounded-lg py-1 px-2 text-[.6rem]">
                         currently reading
                     </span>
                 )}
             </div>
-        </div>
+        </div >
     );
 }

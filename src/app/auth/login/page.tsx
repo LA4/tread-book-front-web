@@ -48,7 +48,7 @@ export default function Login() {
     }
     return (
         <div className='flex h-screen w-screen bg-background bg-cover bg-center flex-col justify-center items-center '>
-            <form action="" onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 bg-charcol p-4'>
+            <form action="" onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5 bg-olive-light rounded-[24px] p-4'>
                 <h4>Login</h4>
                 <input className="flex p-1 rounded-t-lg " placeholder="email" {...register("email")} />
                 <input className="flex p-1 rounded-t-lg " placeholder="password" {...register("password")} />

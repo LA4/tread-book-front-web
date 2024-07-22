@@ -36,6 +36,7 @@ export default function Home() {
       const data = await response.json();
       setBooks(data.results);
       countPage(data.count, limitOfPage)
+      console.log(data)
     } catch (error) {
       console.error(error)
     }
@@ -78,17 +79,17 @@ export default function Home() {
     fetchingAllBooks()
   }, [paginate, status]);
   return (
-    <main className="bg-background-gradient bg-gradient  flex p-[12px] flex-col gap-4 my-[70px] py-[24px] ">
-      <div className="flex flex-col gap-2 items-center bg-beige-light   ">
+    <main className=" flex p-[12px] flex-col gap-4 my-[70px] py-[24px] justify-center items-center ">
+      <div className="flex flex-col gap-2 items-center bg-transparent ">
         <CategorySelector handleStatus={handleStatus} />
       </div>
-      <span>{status}</span>
-      <section className="flex gap-2 overflow-scroll flex-col h-screen ">
+      <section className="flex gap-4 flex-col md:flex-row items-center h-full min-h-screen md:w-[800px] md:items-start md:justify-center overflow-hidden md:flex-wrap ">
         {books &&
           books.map((e: BooksType) => {
             if (e !== null) {
               return (
                 <div
+                  className="flex justify-center"
                   key={e._id}
                   onClick={() => {
                     setOpenModal(true);
@@ -109,16 +110,16 @@ export default function Home() {
               );
             }
           })}
-        <ul className="flex gap-2 justify-center">
-          {pageCount.length > 1 && pageCount.map((e, i) => {
-            return <li className={`flex bg-charcol p-2 ${e + 1 === page ? 'text-olive-light' : 'text-olive-dark'}`}
-              onClick={() => {
-                setPage(e + 1)
-                setPaginate(e * limitOfPage)
-              }} key={i}>{e + 1}</li>
-          })}
-        </ul>
       </section>
+      <ul className="flex gap-2 justify-center">
+        {pageCount.length > 1 && pageCount.map((e, i) => {
+          return <li className={`flex bg-beige-light  w-10 justify-center p-2 ${e + 1 === page ? 'text-accent border-b-2' : 'text-gray'}`}
+            onClick={() => {
+              setPage(e + 1)
+              setPaginate(e * limitOfPage)
+            }} key={i}>{e + 1}</li>
+        })}
+      </ul>
     </main >
   );
 }

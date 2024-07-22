@@ -182,7 +182,7 @@ export default function AddPage() {
         </Modal>
       )}
       <h4 className="flex justify-center w-full ">Reading a new book</h4>
-      {error && <span className="flex text-orange bg-charcol p-2 justify-center">{error}</span>}
+      {error && <span className="flex text-gold bg-charcol p-2 justify-center">{error}</span>}
       <div className="flex gap-4 px-2 items-center">
         <InputField
           placeholder="Search a book"

@@ -69,8 +69,7 @@ export default function Profil() {
             </div>
             <div className='flex flex-col justify-center items-center w-full'>
                 <span>Reading Pages :</span>
-                <span>1234</span>
-                <span>My last actual reading book</span>
+                <span>{user.pages}</span>
             </div>
             <span className='flex w-screen border-2 border-charcol h-[2px] my-4'></span>
             <div>

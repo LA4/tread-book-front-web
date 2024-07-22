@@ -4,6 +4,7 @@
 body{
   background-color:#E0E0D1;
 }
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -25,4 +26,5 @@ body{
     font-display: swap;
     src: url('/public/assets/fonts/Raleway-Bold.ttf') format('truetype');
   }
+
 }

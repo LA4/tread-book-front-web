@@ -13,18 +13,19 @@ const config: Config = {
     extend: {
       backgroundImage: {
         "background-gradient": "rgb(43,74,74)",
-        "gradient": "linear-gradient(0deg, rgba(60,61,52,.4) 0%, rgba(191,191,170,0.4) 100%)",
+        "gradient": "radial-gradient(circle, rgba(52,64,53,0.4) 0%, rgba(137,140,116,0.2) 100%)",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         'background': "url('/assets/images/background.jpg')",
       },
       colors: {
-        "charcol": "#58594D",
-        "olive-light": "#BFBFAA",
-        "olive-dark": "#3C3D34",
-        "beige-light": "#E0E0D1",
-        "orange": "#FFCC80",
+        "charcol": "#132015",
+        "olive-light": "#80B388",
+        "olive-dark": "#396040",
+        "beige-light": "#DFECE1",
+        "gold": "#9F8A60",
+        "accent": "#60759F",
         "white": "#F5F6F6",
-        "gray": "#78786D",
+        "gray": "#adb8b2",
       }, animation: {
         'spin-slow': 'spin 1.8s linear infinite',
       },

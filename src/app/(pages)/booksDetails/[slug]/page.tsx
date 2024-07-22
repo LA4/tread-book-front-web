@@ -112,7 +112,7 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
             </div>
             <div className="flex gap-2 justify-center items-center ">
               <input
-                className="text-center w-1/2 bg-charcol flex text-[1.8rem] text-orange focus:ring-4 ring-transparent outline-0"
+                className="text-center w-1/2 bg-charcol flex text-[1.8rem] text-gold focus:ring-4 ring-transparent outline-0"
                 {...register("pageRead")} />
               <span className="flex w-1/5 text-olive-light">/ {bookData.pages}</span>
             </div>
