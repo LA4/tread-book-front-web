@@ -1,7 +1,9 @@
-import React from 'react'
+import React from "react";
 
 export default function NotFound() {
-    return (
-        <div>NotFound</div>
-    )
+  return (
+    <div className="flex w-screen h-screen justify-center items-center">
+      NotFound
+    </div>
+  );
 }

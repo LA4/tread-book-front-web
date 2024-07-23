@@ -1,8 +1,10 @@
-'use client'
-import React from 'react'
+"use client";
+import React from "react";
 
 export default function Error({ error }: { error: Error }) {
   return (
-    <div>{error.message}</div>
-  )
+    <main className="flex justify-center w-screen h-screen">
+      {error.message}
+    </main>
+  );
 }
