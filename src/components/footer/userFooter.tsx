@@ -25,7 +25,7 @@ export default function UserFooter() {
             <Link href="/favorite" className="flex justify-center flex-col items-center text-[12px] gap-1 w-1/3">
 
                 <Icons name="book"></Icons>
-                <span>My reading book</span>
+                <span>find my book</span>
 
             </Link>
 

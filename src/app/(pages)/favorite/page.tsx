@@ -32,16 +32,8 @@ export default function Favorite() {
         fetchFavorites();
     }, [])
     return (
-        <div className='flex flex-col mt-[180px]'>
-            {loading && <span>loading ...</span>}
-            <span>{favorite?.pages}</span>
-            <span>{favorite?.pageRead}</span>
-            <span>{favorite?.title}</span>
-            <span>{favorite?.author?.name}</span>
-            <span>{favorite?.category.name}</span>
-            <span>{favorite?.publisher.name}</span>
-            <span>{favorite?.resume}</span>
-            <span>{favorite?.opinion}</span>
+        <div>page de recherche de livre
+
         </div>
     )
 }
