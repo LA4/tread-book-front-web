@@ -15,7 +15,7 @@ const config: Config = {
         "background-gradient": "rgb(43,74,74)",
         "gradient": "radial-gradient(circle, rgba(52,64,53,0.4) 0%, rgba(137,140,116,0.2) 100%)",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        'background': "url('/assets/images/background.jpg')",
+        'background': "url('/assets/images/background2.jpg')",
       },
       colors: {
         "charcol": "#132015",

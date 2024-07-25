@@ -8,7 +8,7 @@ import Icons from "@/components/svg/Icons";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-const API_THREADBOOK = process.env.API_THREADBOOK
+const API_THREADBOOK = process.env.API_THREADBOOK;
 export enum BookStatus {
   READ = "READ",
   CURRENTLY_READING = "CURRENTLY_READING",
@@ -26,18 +26,18 @@ export type BookProps = {
 };
 
 export default function AddPage() {
-
   const [value, setValue] = useState("");
   const [modal, setModal] = useState<boolean>(false);
   const [dataFormated, setdataFormated] = useState<BookProps[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [choosingBook, setChoosingBook] = useState<BookProps | null>(null);
-  const [error, setError] = useState<string>("")
-  const user = useSelector((state: RootState) => state.user.value)
+  const [error, setError] = useState<string>("");
+  const user = useSelector((state: RootState) => state.user.value);
 
   const router = useRouter();
   const handleInputValue = (data: string) => {
     setValue(data);
+    setError((prev) => (prev = ""));
   };
   const SearchBookAPI = async () => {
     if (value.trim() === "") {
@@ -100,8 +100,8 @@ export default function AddPage() {
       });
       const data = await response.json();
       if (data.statusCode) {
-        setError(data.message)
-        return
+        setError(data.message);
+        return;
       }
       router.push("/home");
     } catch (error) {
@@ -111,10 +111,9 @@ export default function AddPage() {
 
   return (
     <main className="flex p-[12px] flex-col gap-4 my-[70px] py-[24px] ">
-
       {modal && (
         <Modal>
-          <div className="flex absolute w-screen bg-olive-light h-screen left-0 top-0 flex-col items-center">
+          <div className="flex absolute w-screen bg-beige-light h-screen left-0 top-0 flex-col items-center">
             <div className="flex flex-col p-3">
               {loading && (
                 <div className="flex justify-center items-center">
@@ -147,7 +146,7 @@ export default function AddPage() {
                       onClick={() => {
                         handleChoosingBook(e.id);
                       }}
-                      className=" text-charcol p-2 flex border-2 border-charcol  m-1 flex-col"
+                      className=" text-charcol p-2 flex border-2 m-1 flex-col"
                       key={e.id}
                     >
                       <span>
@@ -181,15 +180,21 @@ export default function AddPage() {
           </div>
         </Modal>
       )}
-      <h4 className="flex justify-center w-full ">Reading a new book</h4>
-      {error && <span className="flex text-gold bg-charcol p-2 justify-center">{error}</span>}
-      <div className="flex gap-4 px-2 items-center">
+      <h4 className="flex justify-center w-full text-olive-dark font-bold ">
+        Reading a new book !
+      </h4>
+      {error && (
+        <span className="flex text-gold bg-charcol p-2 justify-center">
+          {error}
+        </span>
+      )}
+      <div className="flex gap-4 px-8 items-center">
         <InputField
           placeholder="Search a book"
           handleInputValue={handleInputValue}
         ></InputField>
         <button
-          className="flex bg-charcol font-bold text-sm text-beige-light p-2 rounded-full h-[30px] justify-center items-center"
+          className="flex bg-olive-dark font-bold text-sm text-beige-light p-2 rounded-full h-[30px] justify-center items-center"
           onClick={() => {
             if (value.trim() === "") {
               return;
