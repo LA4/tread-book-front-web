@@ -1,8 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body{
-  background-color:#E0E0D1;
+body {
+  background-color: #e0e0d1;
+  font-family: "Raleway";
 }
 
 @layer utilities {
@@ -12,19 +13,18 @@ body{
 }
 @layer base {
   @font-face {
-    font-family: 'Raleway';
+    font-family: "Raleway";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('/public/assets/fonts/Raleway-Regular.ttf') format('truetype');
+    src: url("/public/assets/fonts/Raleway-Regular.ttf") format("truetype");
   }
- 
+
   @font-face {
-    font-family: 'RalewayBold';
+    font-family: "RalewayBold";
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url('/public/assets/fonts/Raleway-Bold.ttf') format('truetype');
+    src: url("/public/assets/fonts/Raleway-Bold.ttf") format("truetype");
   }
-
 }

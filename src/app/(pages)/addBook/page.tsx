@@ -90,7 +90,7 @@ export default function AddPage() {
       created_at: new Date(),
       resume: data.resume,
       opinion: "",
-      status: BookStatus.CURRENTLY_READING,
+      status: BookStatus.TO_BE_READ,
     };
     try {
       const response = await fetch(`${API_THREADBOOK}books/new`, {
@@ -110,7 +110,7 @@ export default function AddPage() {
   };
 
   return (
-    <main className="flex p-[12px] flex-col gap-4 my-[70px] py-[24px] ">
+    <main className="flex p-[12px] flex-col gap-4 my-[70px] py-[24px]">
       {modal && (
         <Modal>
           <div className="flex absolute w-screen bg-beige-light h-screen left-0 top-0 flex-col items-center">

@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="relative">
+      <body className="relative min-h-screen bg-center ">
         <ReduxProvider>
           <>{children}</>
         </ReduxProvider>

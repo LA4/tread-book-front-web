@@ -53,8 +53,8 @@ export default function Search() {
                   id={e._id.toString()}
                   title={e.title}
                   pages={e.pages}
-                  resume={e.resume}
                   status={e.status}
+                  opinion={e.opinion}
                   pageRead={e.pageRead}
                 ></SingleBook>
               );

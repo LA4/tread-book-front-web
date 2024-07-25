@@ -52,7 +52,7 @@ export default function CategorySelector({ handleStatus }: StatusProps) {
           status === "toBeRead" && " font-bold  underline"
         }`}
       >
-        T D R
+        T B R
       </span>
     </div>
   );

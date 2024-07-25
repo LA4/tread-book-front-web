@@ -56,23 +56,23 @@ export default function Login() {
     reset();
   };
   return (
-    <div className="flex h-screen w-screen bg-background bg-cover bg-center  flex-col justify-center items-center ">
+    <div className="flex h-screen w-screen bg-background bg-cover bg-center flex-col justify-center items-center ">
       <form
         action=""
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-5 shadow-2xl shadow-charcol bg-olive-light font-raleway  justify-center items-center rounded-[24px] p-4"
+        className="flex flex-col gap-5 shadow-2xl shadow-charcol bg-beige-light font-raleway items-center rounded-[24px] p-4"
       >
-        <h4>Login</h4>
+        <h4 className="font-bold ">Login</h4>
         <input
-          className="flex p-1 rounded-t-lg w-full "
+          className="flex p-1 rounded-t-lg w-full border-b-2 border-charcol "
           placeholder="email"
           {...register("email")}
         />
         <span className="flex items-center gap-2">
           {" "}
           <input
-            className="flex p-1 rounded-t-lg "
-            type={password ? "password" : "text"}
+            className="flex p-1 rounded-t-lg border-b-2 border-charcol"
+            type={password ? "text" : "password"}
             placeholder="password"
             {...register("password")}
           />
@@ -82,9 +82,9 @@ export default function Login() {
             }}
           >
             {password ? (
-              <Icons name="eyeClose" className="flex w-[20px]"></Icons>
-            ) : (
               <Icons name="eyeOpen" className="flex w-[20px]"></Icons>
+            ) : (
+              <Icons name="eyeClose" className="flex w-[20px]"></Icons>
             )}
           </span>
         </span>

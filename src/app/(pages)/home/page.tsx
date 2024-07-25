@@ -7,7 +7,7 @@ import { BookStatus } from "../addBook/page";
 import { useSelector } from "react-redux";
 import { RootState } from "@/components/provider/reduxProvider";
 
-const API_THREADBOOK = process.env.API_THREADBOOK
+const API_THREADBOOK = process.env.API_THREADBOOK;
 
 export type BooksType = {
   _id: number;
@@ -22,61 +22,60 @@ export type BooksType = {
   status: BookStatus;
 };
 export default function Home() {
-  const user = useSelector((state: RootState) => state.user.value)
+  const user = useSelector((state: RootState) => state.user.value);
   const [books, setBooks] = useState<BooksType[] | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [paginate, setPaginate] = useState<number>(0)
-  const [pageCount, setPageCount] = useState<number[]>([])
-  const [status, setStatus] = useState(null)
-  const [page, setPage] = useState<number>(1)
-  const limitOfPage: number = 5
+  const [paginate, setPaginate] = useState<number>(0);
+  const [pageCount, setPageCount] = useState<number[]>([]);
+  const [status, setStatus] = useState(null);
+  const [page, setPage] = useState<number>(1);
+  const limitOfPage: number = 5;
   const fetchingAllBooks = async () => {
     try {
-      const response = await fetch(`${API_THREADBOOK}books/${user.user_id}?documentToSkip=${paginate}&limitOfDocuments=${limitOfPage}`);
+      const response = await fetch(
+        `${API_THREADBOOK}books/${user.user_id}?documentToSkip=${paginate}&limitOfDocuments=${limitOfPage}`
+      );
       const data = await response.json();
       setBooks(data.results);
-      countPage(data.count, limitOfPage)
-      console.log(data)
+      countPage(data.count, limitOfPage);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   };
   const countPage = (countPage: number, limitOfDocuments: number) => {
-    let listPages = []
+    let listPages = [];
     for (let i = 0; i < Math.ceil(countPage / limitOfDocuments); i++) {
-      listPages.push(i)
-      setPageCount(listPages)
+      listPages.push(i);
+      setPageCount(listPages);
     }
-
-  }
+  };
   const fetchBookFromStatus = async (status: string) => {
-
     try {
       const response = await fetch(
         `${API_THREADBOOK}books/status/${user.user_id}?status=${status}&documentToSkip=${paginate}&limitOfDocuments=${limitOfPage}`
       );
       const data = await response.json();
       setBooks(data.results);
-      countPage(data.count, limitOfPage)
+      countPage(data.count, limitOfPage);
     } catch (error) {
       console.error(error);
     }
   };
   const handleStatus = (data: any) => {
-    setStatus(data)
+    setStatus(data);
     if (data === "null") {
-      setStatus(null)
-      fetchingAllBooks()
-      return
+      setStatus(null);
+      fetchingAllBooks();
+      return;
     }
     fetchBookFromStatus(data);
   };
   useEffect(() => {
     if (status !== null) {
-      fetchBookFromStatus(status)
-      return
+      fetchBookFromStatus(status);
+      return;
     }
-    fetchingAllBooks()
+    fetchingAllBooks();
   }, [paginate, status]);
   return (
     <main className=" flex p-[12px] flex-col gap-4 my-[70px] py-[24px] justify-center items-center ">
@@ -112,14 +111,24 @@ export default function Home() {
           })}
       </section>
       <ul className="flex gap-2 justify-center">
-        {pageCount.length > 1 && pageCount.map((e, i) => {
-          return <li className={`flex bg-beige-light  w-10 justify-center p-2 ${e + 1 === page ? 'text-accent border-b-2' : 'text-gray'}`}
-            onClick={() => {
-              setPage(e + 1)
-              setPaginate(e * limitOfPage)
-            }} key={i}>{e + 1}</li>
-        })}
+        {pageCount.length > 1 &&
+          pageCount.map((e, i) => {
+            return (
+              <li
+                className={`flex bg-beige-light  w-10 justify-center p-2 ${
+                  e + 1 === page ? "text-accent border-b-2" : "text-gray"
+                }`}
+                onClick={() => {
+                  setPage(e + 1);
+                  setPaginate(e * limitOfPage);
+                }}
+                key={i}
+              >
+                {e + 1}
+              </li>
+            );
+          })}
       </ul>
-    </main >
+    </main>
   );
 }
