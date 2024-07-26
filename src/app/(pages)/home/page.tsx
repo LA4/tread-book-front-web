@@ -3,9 +3,9 @@
 import CategorySelector from "@/components/categorySelector/categorySelector";
 import SingleBook from "@/components/singleBook/singleBook";
 import { useEffect, useState } from "react";
-import { BookStatus } from "../addBook/page";
 import { useSelector } from "react-redux";
 import { RootState } from "@/components/provider/reduxProvider";
+import { BookStatus } from "@/hooks/enum";
 
 const API_THREADBOOK = process.env.API_THREADBOOK;
 

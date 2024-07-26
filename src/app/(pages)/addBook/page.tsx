@@ -5,15 +5,12 @@ import InputField from "@/components/inputField/inputField";
 import Modal from "@/components/modal/modal";
 import { RootState } from "@/components/provider/reduxProvider";
 import Icons from "@/components/svg/Icons";
+import { BookStatus } from "@/hooks/enum";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 const API_THREADBOOK = process.env.API_THREADBOOK;
-export const enum BookStatus {
-  READ = "READ",
-  CURRENTLY_READING = "CURRENTLY_READING",
-  TO_BE_READ = "TO_BE_READ",
-}
+
 export type BookProps = {
   id: string;
   title: string;
