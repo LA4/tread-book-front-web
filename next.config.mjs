@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    env:{
-        API_THREADBOOK:"http://localhost:3000/"
-    }, 
-    
+  env: {
+    API_THREADBOOK: "thread-book-api.vercel.app/",
+  },
 };
 
 export default nextConfig;
