@@ -38,7 +38,7 @@ export default function Login() {
 
     if (!data.error) {
       const profilePicture = await fetch(
-        `thread-book-api.vercel.app/files/${data.user.avatar}`
+        `https://thread-book-api.vercel.app/files/${data.user.avatar}`
       );
       dispatch(avatar(profilePicture.url));
       dispatch(
