@@ -28,7 +28,7 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
   const fetchDetailsById = async (id: string) => {
     try {
       const response = await fetch(
-        `${API_THREADBOOK}books/${id}/${user.user_id}`
+        `thread-book-api.vercel.app/books/${id}/${user.user_id}`
       );
       const data = await response.json();
       setBookData((prev) => (prev = data));
@@ -50,7 +50,7 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
       status: bookUpdate.status,
     };
     const response = await fetch(
-      `${API_THREADBOOK}books/update/${user.user_id}`,
+      `thread-book-api.vercel.app/books/update/${user.user_id}`,
       {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -65,7 +65,7 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
   };
   const fetchDeleteBook = async (id: number) => {
     const response = await fetch(
-      `http://localhost:3000/books/delete/${id}/${user.user_id}`,
+      `thread-book-api.vercel.app/books/delete/${id}/${user.user_id}`,
       { method: "DELETE" }
     );
     const data = await response.json();
@@ -92,7 +92,7 @@ export default function BooksDetails({ params }: { params: { slug: string } }) {
     fetchUpdateBook(data);
   };
   const handleFavorite = async () => {
-    const response = await fetch(`${API_THREADBOOK}favorite`, {
+    const response = await fetch(`thread-book-api.vercel.app/favorite`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId: user.user_id, bookId: params.slug }),

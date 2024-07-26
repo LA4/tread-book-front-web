@@ -14,7 +14,7 @@ export default function Search() {
 
   const fetchSearch = async () => {
     const response = await fetch(
-      `${API_THREADBOOK}search/${user.user_id}?q=${inputValue}`
+      `thread-book-api.vercel.app/search/${user.user_id}?q=${inputValue}`
     );
     const data = await response.json();
     setBooks(data);

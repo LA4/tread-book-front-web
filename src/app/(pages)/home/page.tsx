@@ -33,7 +33,7 @@ export default function Home() {
   const fetchingAllBooks = async () => {
     try {
       const response = await fetch(
-        `${API_THREADBOOK}books/${user.user_id}?documentToSkip=${paginate}&limitOfDocuments=${limitOfPage}`
+        `thread-book-api.vercel.app/books/${user.user_id}?documentToSkip=${paginate}&limitOfDocuments=${limitOfPage}`
       );
       const data = await response.json();
       setBooks(data.results);
@@ -52,7 +52,7 @@ export default function Home() {
   const fetchBookFromStatus = async (status: string) => {
     try {
       const response = await fetch(
-        `${API_THREADBOOK}books/status/${user.user_id}?status=${status}&documentToSkip=${paginate}&limitOfDocuments=${limitOfPage}`
+        `thread-book-api.vercel.app/books/status/${user.user_id}?status=${status}&documentToSkip=${paginate}&limitOfDocuments=${limitOfPage}`
       );
       const data = await response.json();
       setBooks(data.results);

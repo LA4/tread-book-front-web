@@ -5,6 +5,9 @@ import { ReduxProvider } from "@/components/provider/reduxProvider";
 export const metadata: Metadata = {
   title: "Thead book",
   description: "",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

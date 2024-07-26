@@ -39,14 +39,16 @@ export default function Profil() {
     }
     try {
       const response = await fetch(
-        `${API_THREADBOOK}files/upload/${user.user_id}`,
+        `thread-book-api.vercel.app/files/upload/${user.user_id}`,
         {
           method: "POST",
           body: formData,
         }
       );
       const data = await response.json();
-      const res2 = await fetch(`${API_THREADBOOK}files/${data.result}`);
+      const res2 = await fetch(
+        `thread-book-api.vercel.app/files/${data.result}`
+      );
       dispatch(avatar(res2.url));
       setOpenModal(!openModal);
     } catch (error) {

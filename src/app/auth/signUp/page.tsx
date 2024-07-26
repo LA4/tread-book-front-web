@@ -29,7 +29,7 @@ export default function SignUP() {
     // reset()
   };
   const fetchSignUp = async (userData: Inputs) => {
-    const response = await fetch(`${API_THREADBOOK}auth/signUp`, {
+    const response = await fetch(`thread-book-api.vercel.app/auth/signUp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
