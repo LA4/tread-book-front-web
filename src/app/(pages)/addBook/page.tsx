@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 const API_THREADBOOK = process.env.API_THREADBOOK;
-export enum BookStatus {
+export const enum BookStatus {
   READ = "READ",
   CURRENTLY_READING = "CURRENTLY_READING",
   TO_BE_READ = "TO_BE_READ",
