@@ -7,6 +7,7 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
+const API_THREADBOOK = process.env.API_THREADBOOK;
 type Inputs = {
   username: string;
   email: string;
@@ -28,7 +29,7 @@ export default function SignUP() {
     // reset()
   };
   const fetchSignUp = async (userData: Inputs) => {
-    const response = await fetch("http://localhost:3000/auth/signUp", {
+    const response = await fetch(`${API_THREADBOOK}auth/signUp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),

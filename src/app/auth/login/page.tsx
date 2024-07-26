@@ -26,7 +26,7 @@ export default function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
   const fetchLogin = async (logs: Inputs) => {
-    const response = await fetch("http://localhost:3000/auth/signIn", {
+    const response = await fetch(`${API_THREADBOOK}auth/signIn`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(logs),
