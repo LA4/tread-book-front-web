@@ -90,7 +90,7 @@ export default function AddPage() {
       status: BookStatus.TO_BE_READ,
     };
     try {
-      const response = await fetch(`thread-book-api.vercel.app/books/new`, {
+      const response = await fetch(`${API_THREADBOOK}/books/new`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookDTO),
