@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    API_THREADBOOK: "thread-book-api.vercel.app/",
+    API_THREADBOOK: "https://thread-book-api.onrender.com",
   },
 };
 
