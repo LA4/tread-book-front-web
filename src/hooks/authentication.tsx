@@ -9,7 +9,7 @@ export default async function Authentication() {
     return { result: false };
   }
   try {
-    const response = await fetch(`${API_THREADBOOK}auth/login`, {
+    const response = await fetch(`${API_THREADBOOK}/auth/login`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
