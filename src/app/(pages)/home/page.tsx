@@ -33,7 +33,7 @@ export default function Home() {
   const fetchingAllBooks = async () => {
     try {
       const response = await fetch(
-        `${API_THREADBOOK}/books/${user.user_id}?documentToSkip=${paginate}&limitOfDocuments=${limitOfPage}API_THREADBOOK`
+        `${API_THREADBOOK}/books/${user.user_id}?documentToSkip=${paginate}&limitOfDocuments=${limitOfPage}`
       );
       const data = await response.json();
       setBooks(data.results);
