@@ -26,19 +26,16 @@ export default function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
   const fetchLogin = async (logs: Inputs) => {
-    const response = await fetch(
-      `https://thread-book-api.vercel.app/auth/signIn`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(logs),
-      }
-    );
+    const response = await fetch(`${API_THREADBOOK}/auth/signIn`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(logs),
+    });
     const data = await response.json();
 
     if (!data.error) {
       const profilePicture = await fetch(
-        `https://thread-book-api.vercel.app/files/${data.user.avatar}`
+        `${API_THREADBOOK}/files/${data.user.avatar}`
       );
       dispatch(avatar(profilePicture.url));
       dispatch(
