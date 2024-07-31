@@ -6,10 +6,10 @@ export default function Hero() {
   return (
     <>
       <div className="flex h-screen w-screen bg-background bg-cover bg-center flex-col gap-20  justify-center items-center ">
-        <h1 className="text-white font-bold text-[5rem] leading-none text-center z-10 underline underline-offset-[20px] ">
+        <h1 className="text-white font-bold text-[5rem] leading-none text-center z-10  ">
           Thread Book
         </h1>
-        <div className="text-white leading-5 text-justify w-[50%] z-10 flex flex-col">
+        <div className="text-white leading-5 text-justify w-[70%] z-10 flex flex-col">
           <span>Découvrez une nouvelle façon de suivre vos lectures !</span>{" "}
           Thread Book est votre compagnon pour organiser, sauvegarder et suivre
           vos lectures. Que vous soyez un lecteur occasionnel ou un passionné de
