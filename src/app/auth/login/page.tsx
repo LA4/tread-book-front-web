@@ -62,7 +62,7 @@ export default function Login() {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-5 shadow-2xl shadow-charcol bg-beige-light font-raleway items-center rounded-[24px] p-4"
       >
-        <h4 className="font-bold ">Login</h4>
+        <h4 className=" ">Login</h4>
         <input
           className="flex p-1 rounded-t-lg w-full border-b-2 border-charcol "
           placeholder="email"

@@ -57,7 +57,7 @@ export default function SignUP() {
   return (
     <div className="flex h-screen w-screen bg-background bg-cover bg-center flex-col justify-center items-center ">
       <form
-        className="flex flex-col gap-5 font-raleway bg-olive-light  justify-center items-center rounded-[24px] p-4"
+        className="flex flex-col gap-5 shadow-2xl shadow-charcol bg-beige-light font-raleway items-center rounded-[24px] p-4"
         action=""
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -104,11 +104,20 @@ export default function SignUP() {
             required: "please enter your password",
           })}
         />
-        <button type="submit"> Register</button>
+        <button
+          type="submit"
+          className="flex w-3/4 bg-olive-dark items-center justify-center rounded-full text-white"
+        >
+          {" "}
+          Register
+        </button>
+        <Link
+          href={"/auth/login"}
+          className="font-raleway text-[0.8rem] underline"
+        >
+          You already have an accout ?
+        </Link>
       </form>
-      <Link href={"/auth/login"} className="font-raleway">
-        You already have an accout ?
-      </Link>
     </div>
   );
 }
