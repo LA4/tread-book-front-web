@@ -7,6 +7,7 @@ export default function Hero() {
     try {
       const response = await fetch(`${API_THREADBOOK}/books/`);
       const data = await response.json();
+      console.error("to activate API, don't worry");
     } catch (error) {
       console.error("activate backEnd api");
     }
