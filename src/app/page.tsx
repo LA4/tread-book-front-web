@@ -1,8 +1,20 @@
 "use client";
 import Link from "next/link";
-import React from "react";
-
+import React, { useEffect } from "react";
+const API_THREADBOOK = process.env.API_THREADBOOK;
 export default function Hero() {
+  const fetchiActivateBackend = async () => {
+    try {
+      const response = await fetch(`${API_THREADBOOK}/books/`);
+      const data = await response.json();
+    } catch (error) {
+      console.error("activate backEnd api");
+    }
+  };
+
+  useEffect(() => {
+    fetchiActivateBackend();
+  });
   return (
     <>
       <div className="flex h-screen w-screen bg-background bg-cover bg-center flex-col gap-20  justify-center items-center ">
